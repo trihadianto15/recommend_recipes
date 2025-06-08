@@ -28,5 +28,6 @@ if st.button("Rekomendasikan"):
         st.subheader("🍲 Rekomendasi Resep:")
         for i, row in recommendations.iterrows():
             st.markdown(f"### {row['Title']}")
-            st.markdown(f"**Bahan:** {row['Ingredients']}")
+            ingredients = row['Ingredients'] if pd.notna(row['Ingredients']) else 'Tidak tersedia'
+            st.markdown(f"**Bahan:** {ingredients}")
             st.markdown("---")
