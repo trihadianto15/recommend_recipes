@@ -22,8 +22,12 @@ if st.button("Rekomendasikan"):
         user_vec = tfidf.transform([user_input.lower()])
         scores = cosine_similarity(user_vec, tfidf_matrix).flatten()
         top_indices = scores.argsort()[::-1][:5]
-        recommendations = df.iloc[top_indices][['Title', 'Ingredients']].copy()
-        recommendations['Similarity Score'] = scores[top_indices]
+        top_indices = top_indices.astype(int)  # pastikan index integer
+        selected = df.loc[top_indices].copy()  # gunakan loc, bukan iloc + slicing
+        selected = selected[['Title', 'Ingredients']]  # ambil kolom yang dibutuhkan
+        selected['Similarity Score'] = scores[top_indices]
+        recommendations = selected
+
 
         st.subheader("🍲 Rekomendasi Resep:")
         for i, row in recommendations.iterrows():
