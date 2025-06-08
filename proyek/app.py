@@ -2,23 +2,12 @@ import streamlit as st
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import joblib
-import os
 
-# Path aman relatif terhadap lokasi file
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load model dan data
-tfidf = joblib.load(os.path.join(BASE_DIR, 'tfidf_vectorizer.pkl'))
-tfidf_matrix = joblib.load(os.path.join(BASE_DIR, 'tfidf_matrix.pkl'))
-df = pd.read_csv(os.path.join(BASE_DIR, 'data_clean.csv'))
-
-try:
-    tfidf = joblib.load(tfidf_path)
-    tfidf_matrix = joblib.load(matrix_path)
-    df = pd.read_csv(data_path)
-except FileNotFoundError as e:
-    st.error(f"Gagal memuat file: {e}")
-    st.stop()
+tfidf = joblib.load('recommend_recipes/tfidf_vectorizer.pkl')
+tfidf_matrix = joblib.load('recommned_recipes/tfidf_matrix.pkl')
+df = pd.read_csv('recommend_recipes/data_clean.csv')
 
 # Judul
 st.title("🍲 Sistem Rekomendasi Resep Berdasarkan Bahan")
