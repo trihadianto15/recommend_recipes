@@ -23,18 +23,11 @@ if st.button("Rekomendasikan"):
         user_vec = tfidf.transform([user_input.lower()])
         scores = cosine_similarity(user_vec, tfidf_matrix).flatten()
         top_indices = scores.argsort()[::-1][:5]
-        top_indices = top_indices.astype(int)  # pastikan indeks integer
+        recommendations = df.iloc[top_indices][['Title', 'Ingredients']].copy()
+        recommendations['Similarity Score'] = scores[top_indices]
 
-        selected = df.loc[top_indices].copy()
-        selected = selected[['Title', 'Ingredients']]
-        selected['Similarity Score'] = scores[top_indices]
-        recommendations = selected
-
-        st.subheader("🍽️ Rekomendasi Resep:")
-        for _, row in recommendations.iterrows():
-            title = row['Title'] if pd.notna(row['Title']) else 'Tanpa Judul'
-            ingredients = row['Ingredients'] if pd.notna(row['Ingredients']) else 'Tidak tersedia'
-
-            st.markdown(f"#### {title}")
-            st.markdown(f"**Bahan:** {ingredients}")
+        st.subheader("🍲 Rekomendasi Resep:")
+        for i, row in recommendations.iterrows():
+            st.markdown(f"### {row['Title']}")
+            st.markdown(f"**Bahan:** {row['Ingredients']}")
             st.markdown("---")
