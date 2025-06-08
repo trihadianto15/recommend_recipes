@@ -28,8 +28,8 @@ def load_model_and_data():
     return tfidf, tfidf_matrix, df
 
 # Load model dan data
-tfidf = joblib.load('https://github.com/trihadianto15/recommend_recipes/blob/main/proyek/tfidf_vectorizer.pkl')
-tfidf_matrix = joblib.load('https://github.com/trihadianto15/recommend_recipes/blob/main/proyek/tfidf_matrix.pkl')
+tfidf = joblib.load('tfidf_vectorizer.pkl')
+tfidf_matrix = joblib.load('tfidf_matrix.pkl')
 df = pd.read_csv('data_clean.csv')
 
 # Judul
