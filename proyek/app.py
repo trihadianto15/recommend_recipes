@@ -5,7 +5,7 @@ import joblib
 
 # Load model dan data
 tfidf = joblib.load('tfidf_vectorizer.pkl')
-tfidf_matrix = joblib.load('tfidf_matrix.pkl')
+tfidf_matrix = joblib.load('https://github.com/trihadianto15/recommend_recipes/blob/main/proyek/tfidf_matrix.pkl')
 df = pd.read_csv('data_clean.csv')
 
 # Judul
