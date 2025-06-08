@@ -8,9 +8,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load model dan data
-tfidf_path = os.path.join(BASE_DIR, 'tfidf_vectorizer.pkl')
-matrix_path = os.path.join(BASE_DIR, 'tfidf_matrix.pkl')
-data_path = os.path.join(BASE_DIR, 'data_clean.csv')
+tfidf = joblib.load(os.path.join(BASE_DIR, 'tfidf_vectorizer.pkl'))
+tfidf_matrix = joblib.load(os.path.join(BASE_DIR, 'tfidf_matrix.pkl'))
+df = pd.read_csv(os.path.join(BASE_DIR, 'data_clean.csv'))
 
 try:
     tfidf = joblib.load(tfidf_path)
